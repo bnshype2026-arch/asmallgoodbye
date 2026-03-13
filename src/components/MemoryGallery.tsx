@@ -33,40 +33,88 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
     if (photos.length === 0) return null;
 
     return (
-        <>
+        <div style={{ marginTop: "3rem", padding: "0 1rem" }}>
+            <h3 style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "1.2rem",
+                color: "var(--color-gold-muted)",
+                textAlign: "center",
+                marginBottom: "2rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase"
+            }}>
+                Captured Memories
+            </h3>
+
             <div style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(clamp(120px, 45vw, 200px), 1fr))",
-                gap: "clamp(0.75rem, 3vw, 1.5rem)",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                gap: "2rem",
                 padding: "1rem"
             }}>
-                {photos.map((photo, index) => (
-                    <motion.div
-                        key={photo.id}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: index * 0.1 }}
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        onClick={() => setSelectedPhotoIndex(index)}
-                        style={{
-                            aspectRatio: "1",
-                            borderRadius: "8px",
-                            overflow: "hidden",
-                            cursor: "pointer",
-                            boxShadow: "0 10px 20px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.05)",
-                            position: "relative",
-                            backgroundColor: "rgba(255,255,255,0.5)"
-                        }}
-                    >
-                        <img
-                            src={photo.photo_url}
-                            alt={photo.caption || "Memory"}
-                            style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.5s ease" }}
-                        />
-                        {/* Soft inner shadow/vignette */}
-                        <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 20px rgba(0,0,0,0.1)", pointerEvents: "none" }} />
-                    </motion.div>
-                ))}
+                {photos.map((photo, index) => {
+                    // Random rotation for the polaroid feel
+                    const rotation = (index % 3 === 0) ? -3 : (index % 3 === 1) ? 2 : -1;
+
+                    return (
+                        <motion.div
+                            key={photo.id}
+                            initial={{ opacity: 0, scale: 0.9, rotate: rotation - 5 }}
+                            animate={{ opacity: 1, scale: 1, rotate: rotation }}
+                            transition={{ duration: 1, delay: index * 0.15, ease: "easeOut" }}
+                            whileHover={{ y: -10, rotate: 0, scale: 1.05, zIndex: 10 }}
+                            onClick={() => setSelectedPhotoIndex(index)}
+                            style={{
+                                width: "clamp(140px, 40vw, 180px)",
+                                backgroundColor: "white",
+                                padding: "10px 10px 30px 10px",
+                                border: "1px solid rgba(0,0,0,0.05)",
+                                boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+                                cursor: "pointer",
+                                position: "relative",
+                            }}
+                        >
+                            <div style={{
+                                width: "100%",
+                                aspectRatio: "1",
+                                overflow: "hidden",
+                                backgroundColor: "#eee",
+                                marginBottom: "10px"
+                            }}>
+                                <img
+                                    src={photo.photo_url}
+                                    alt={photo.caption || "Memory"}
+                                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                />
+                            </div>
+
+                            {photo.caption && (
+                                <p style={{
+                                    fontFamily: "var(--font-serif)",
+                                    fontSize: "0.75rem",
+                                    color: "var(--color-text-on-cream)",
+                                    textAlign: "center",
+                                    margin: 0,
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap",
+                                    opacity: 0.7
+                                }}>
+                                    {photo.caption}
+                                </p>
+                            )}
+
+                            {/* Subtle glossy overlay */}
+                            <div style={{
+                                position: "absolute",
+                                inset: 0,
+                                background: "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)",
+                                pointerEvents: "none"
+                            }} />
+                        </motion.div>
+                    );
+                })}
             </div>
 
             <AnimatePresence>
@@ -75,15 +123,17 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        onClick={() => setSelectedPhotoIndex(null)}
                         style={{
                             position: "fixed",
                             inset: 0,
-                            zIndex: 100,
-                            backgroundColor: "rgba(10, 8, 5, 0.9)",
-                            backdropFilter: "blur(10px)",
+                            zIndex: 3000, // Above particles
+                            backgroundColor: "rgba(0, 31, 63, 0.95)", // Royal Backdrop
+                            backdropFilter: "blur(15px)",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            cursor: "zoom-out"
                         }}
                     >
                         <button
@@ -92,126 +142,118 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                                 position: "absolute",
                                 top: "2rem",
                                 right: "2rem",
-                                background: "transparent",
-                                border: "none",
-                                color: "var(--color-cream)",
+                                background: "rgba(255,255,255,0.1)",
+                                border: "1px solid rgba(255,255,255,0.2)",
+                                borderRadius: "50%",
+                                color: "white",
                                 cursor: "pointer",
-                                padding: "8px",
-                                zIndex: 101,
+                                padding: "12px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                             }}
                         >
-                            <X size={32} />
+                            <X size={24} />
                         </button>
 
-                        {photos.length > 1 && (
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setSelectedPhotoIndex((prev) => (prev === 0 ? photos.length - 1 : prev! - 1));
-                                }}
-                                style={{
-                                    position: "absolute",
-                                    left: "2rem",
-                                    background: "transparent",
-                                    border: "none",
-                                    color: "var(--color-cream)",
-                                    cursor: "pointer",
-                                    padding: "16px",
-                                    zIndex: 101,
-                                    opacity: 0.7,
-                                    transition: "opacity 0.2s"
-                                }}
-                                onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
-                                onMouseLeave={(e) => e.currentTarget.style.opacity = "0.7"}
-                            >
-                                <ChevronLeft size={48} />
-                            </button>
-                        )}
-
-                        <motion.div
-                            key={selectedPhotoIndex}
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{
-                                opacity: 1,
-                                scale: 1,
-                                y: [0, -10, 0],
-                            }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{
-                                opacity: { duration: 0.4 },
-                                scale: { duration: 0.4 },
-                                y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-                            }}
-                            style={{
-                                position: "relative",
-                                maxWidth: "90vw",
-                                maxHeight: "85vh",
-                                boxShadow: "0 0 50px rgba(255,255,255,0.1), 0 20px 40px rgba(0,0,0,0.5)",
-                                borderRadius: "4px",
-                            }}
-                        >
-                            <img
-                                src={photos[selectedPhotoIndex].photo_url}
-                                alt={photos[selectedPhotoIndex].caption || "Memory"}
-                                style={{
-                                    maxWidth: "100%",
-                                    maxHeight: "80vh",
-                                    objectFit: "contain",
-                                    borderRadius: "4px",
-                                    display: "block"
-                                }}
-                            />
-
-                            {photos[selectedPhotoIndex].caption && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.5 }}
+                        <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            {photos.length > 1 && (
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedPhotoIndex((prev) => (prev === 0 ? photos.length - 1 : prev! - 1));
+                                    }}
                                     style={{
                                         position: "absolute",
-                                        bottom: "-3rem",
-                                        left: 0,
-                                        right: 0,
-                                        textAlign: "center",
-                                        color: "rgba(255,255,255,0.8)",
-                                        fontFamily: "var(--font-serif)",
-                                        fontSize: "1.1rem",
-                                        letterSpacing: "0.05em",
-                                        fontStyle: "italic"
+                                        left: "2rem",
+                                        background: "rgba(255,255,255,0.05)",
+                                        border: "none",
+                                        color: "white",
+                                        cursor: "pointer",
+                                        padding: "20px",
+                                        borderRadius: "50%",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
                                     }}
                                 >
-                                    {photos[selectedPhotoIndex].caption}
-                                </motion.div>
+                                    <ChevronLeft size={32} />
+                                </button>
                             )}
-                        </motion.div>
 
-                        {photos.length > 1 && (
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setSelectedPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev! + 1));
-                                }}
+                            <motion.div
+                                key={selectedPhotoIndex}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ type: "spring", damping: 30, stiffness: 200 }}
+                                onClick={(e) => e.stopPropagation()}
                                 style={{
-                                    position: "absolute",
-                                    right: "2rem",
-                                    background: "transparent",
-                                    border: "none",
-                                    color: "var(--color-cream)",
-                                    cursor: "pointer",
-                                    padding: "16px",
-                                    zIndex: 101,
-                                    opacity: 0.7,
-                                    transition: "opacity 0.2s"
+                                    maxWidth: "90vw",
+                                    maxHeight: "80vh",
+                                    backgroundColor: "white",
+                                    padding: "20px 20px 60px 20px",
+                                    boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                                    position: "relative",
+                                    cursor: "default"
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
-                                onMouseLeave={(e) => e.currentTarget.style.opacity = "0.7"}
                             >
-                                <ChevronRight size={48} />
-                            </button>
-                        )}
+                                <img
+                                    src={photos[selectedPhotoIndex].photo_url}
+                                    alt={photos[selectedPhotoIndex].caption || "Memory"}
+                                    style={{
+                                        maxWidth: "100%",
+                                        maxHeight: "65vh",
+                                        objectFit: "contain",
+                                        display: "block"
+                                    }}
+                                />
+
+                                {photos[selectedPhotoIndex].caption && (
+                                    <p style={{
+                                        position: "absolute",
+                                        bottom: "1.5rem",
+                                        left: "20px",
+                                        right: "20px",
+                                        textAlign: "center",
+                                        fontFamily: "var(--font-serif)",
+                                        fontSize: "1.2rem",
+                                        color: "#333",
+                                        margin: 0,
+                                        fontStyle: "italic"
+                                    }}>
+                                        {photos[selectedPhotoIndex].caption}
+                                    </p>
+                                )}
+                            </motion.div>
+
+                            {photos.length > 1 && (
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedPhotoIndex((prev) => (prev === photos.length - 1 ? 0 : prev! + 1));
+                                    }}
+                                    style={{
+                                        position: "absolute",
+                                        right: "2rem",
+                                        background: "rgba(255,255,255,0.05)",
+                                        border: "none",
+                                        color: "white",
+                                        cursor: "pointer",
+                                        padding: "20px",
+                                        borderRadius: "50%",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <ChevronRight size={32} />
+                                </button>
+                            )}
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </div>
     );
 }

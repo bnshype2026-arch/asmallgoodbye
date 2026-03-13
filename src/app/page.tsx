@@ -37,6 +37,7 @@ export default function Home() {
       <AnimatePresence>
         {(sceneState === "floating" || sceneState === "code_input") && (
           <motion.div
+            key="intro-scene"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
@@ -98,6 +99,7 @@ export default function Home() {
       <AnimatePresence>
         {sceneState === "code_input" && (
           <LetterCodePanel
+            key="code-panel"
             onSuccess={handleCodeSuccess}
             onCancel={() => setSceneState("floating")}
           />
@@ -108,6 +110,7 @@ export default function Home() {
       <AnimatePresence>
         {(sceneState === "opening" || sceneState === "reading") && (
           <LetterView
+            key="letter-view"
             letterData={letterData}
             isOpening={sceneState === "opening"}
             onClose={handleClose}

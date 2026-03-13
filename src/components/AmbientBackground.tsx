@@ -30,7 +30,7 @@ export default function AmbientBackground() {
                 width: "100vw",
                 height: "100vh",
                 pointerEvents: "none",
-                zIndex: -1,
+                zIndex: 2000,
                 overflow: "hidden",
                 background: "linear-gradient(135deg, var(--color-royal-blue) 0%, #000B1A 100%)",
             }}

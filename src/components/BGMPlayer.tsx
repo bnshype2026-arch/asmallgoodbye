@@ -9,8 +9,8 @@ export default function BGMPlayer() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
-        // We would use an actual audio file, e.g., /audio/piano-loop.mp3
-        audioRef.current = new Audio("/audio/piano-loop.mp3");
+        // We use a query param to bypass cache if updated
+        audioRef.current = new Audio("/audio/piano-loop.mp3?v=1.1");
         audioRef.current.loop = true;
         audioRef.current.volume = 0.4;
 
