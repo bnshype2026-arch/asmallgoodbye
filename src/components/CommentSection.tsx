@@ -66,8 +66,9 @@ export default function CommentSection({ letterId }: { letterId: string }) {
             <h3 style={{
                 fontFamily: "var(--font-serif)",
                 fontSize: "1.4rem",
-                color: "var(--color-text-main)",
-                marginBottom: "2rem"
+                color: "var(--color-royal-blue)",
+                marginBottom: "2rem",
+                fontWeight: 600,
             }}>
                 Leave a Reply
             </h3>
