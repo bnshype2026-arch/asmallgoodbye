@@ -49,42 +49,6 @@ export default function BGMPlayer() {
         setIsPlaying(!isPlaying);
     };
 
-    return (
-        <motion.button
-            onClick={toggleMute}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 2 }}
-            style={{
-                position: "fixed",
-                bottom: "24px",
-                left: "24px",
-                zIndex: 50,
-                background: "rgba(0,0,0,0.3)",
-                border: "1px solid var(--color-gold-muted)",
-                color: "var(--color-gold)",
-                cursor: "pointer",
-                padding: "10px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: "50%",
-                transition: "all 0.3s ease",
-                backdropFilter: "blur(4px)",
-            }}
-            aria-label="Toggle background music"
-            onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--color-gold)";
-                e.currentTarget.style.borderColor = "var(--color-gold)";
-                e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.5)";
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--color-gold)";
-                e.currentTarget.style.borderColor = "var(--color-gold-muted)";
-                e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.3)";
-            }}
-        >
-            {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
-        </motion.button>
-    );
+    // Return null since we want the player to be invisible
+    return null;
 }
