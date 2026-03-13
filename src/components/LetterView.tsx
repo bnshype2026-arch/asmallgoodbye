@@ -125,7 +125,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                             <h1 style={{
                                 fontFamily: "var(--font-serif)",
                                 fontSize: "clamp(1.5rem, 5vw, 2rem)",
-                                color: "var(--color-text-main)",
+                                color: "var(--color-text-on-cream)",
                                 marginBottom: "2rem"
                             }}>
                                 Dear {letterData.recipient_name},
@@ -136,7 +136,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                                     fontFamily: "var(--font-serif)",
                                     fontSize: "clamp(1rem, 4vw, 1.2rem)",
                                     lineHeight: 1.8,
-                                    color: "var(--color-text-main)",
+                                    color: "var(--color-text-on-cream)",
                                     whiteSpace: "pre-wrap",
                                     marginBottom: "3rem"
                                 }}

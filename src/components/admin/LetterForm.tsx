@@ -254,11 +254,19 @@ export default function LetterForm({ initialData, onSave, onCancel }: LetterForm
                     </form>
                 </div>
 
-                <div style={{ padding: "1.5rem 2rem", borderTop: "1px solid #eee", display: "flex", justifyContent: "flex-end", gap: "1rem", backgroundColor: "#fafafa" }}>
-                    <button onClick={onCancel} style={{ padding: "0.75rem 1.5rem", backgroundColor: "white", border: "1px solid #ccc", borderRadius: "4px", cursor: "pointer" }}>
+                <div style={{ padding: "1.5rem 2rem", borderTop: "1px solid #eee", display: "flex", justifyContent: "flex-end", gap: "1rem", backgroundColor: "#FFFAEC" }}>
+                    <button onClick={onCancel} style={{ padding: "0.75rem 1.5rem", backgroundColor: "white", border: "1px solid #ccc", borderRadius: "8px", cursor: "pointer", color: "var(--color-text-on-cream)" }}>
                         Cancel
                     </button>
-                    <button form="letter-form" type="submit" disabled={loading} style={{ padding: "0.75rem 2rem", backgroundColor: "var(--color-text-main)", color: "white", border: "none", borderRadius: "4px", cursor: loading ? "wait" : "pointer" }}>
+                    <button form="letter-form" type="submit" disabled={loading} style={{
+                        padding: "0.75rem 2rem",
+                        backgroundColor: "var(--color-royal-blue)",
+                        color: "var(--color-gold)",
+                        border: "1px solid var(--color-gold-muted)",
+                        borderRadius: "8px",
+                        cursor: loading ? "wait" : "pointer",
+                        fontWeight: 600
+                    }}>
                         {loading ? "Saving..." : "Save Letter"}
                     </button>
                 </div>

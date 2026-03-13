@@ -54,10 +54,10 @@ export default function AdminDashboard() {
     return (
         <div style={{
             minHeight: "100vh",
-            backgroundColor: "#FAF9F6",
+            backgroundColor: "#FFFAEC", // Richer Cream
             padding: "2rem",
             fontFamily: "var(--font-sans)",
-            color: "var(--color-text-main)",
+            color: "var(--color-text-on-cream)",
             position: "relative",
             zIndex: 100
         }}>
@@ -67,13 +67,14 @@ export default function AdminDashboard() {
                     onClick={handleCreateNew}
                     style={{
                         padding: "0.75rem 1.5rem",
-                        backgroundColor: "var(--color-text-main)",
-                        color: "var(--color-cream)",
-                        border: "none",
-                        borderRadius: "6px",
+                        backgroundColor: "var(--color-royal-blue)",
+                        color: "var(--color-gold)",
+                        border: "1px solid var(--color-gold-muted)",
+                        borderRadius: "8px",
                         cursor: "pointer",
-                        fontWeight: 500,
-                        fontSize: "1rem"
+                        fontWeight: 600,
+                        fontSize: "1rem",
+                        boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
                     }}>
                     + Create New Letter
                 </button>
