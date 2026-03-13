@@ -5,7 +5,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function BGMPlayer() {
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
@@ -13,6 +13,12 @@ export default function BGMPlayer() {
         audioRef.current = new Audio("/audio/piano-loop.mp3?v=1.1");
         audioRef.current.loop = true;
         audioRef.current.volume = 0.4;
+
+        // Attempt to play immediately
+        audioRef.current.play().catch((e) => {
+            console.log("Autoplay blocked, waiting for interaction:", e);
+            setIsPlaying(false); // Revert to false if blocked
+        });
 
         return () => {
             if (audioRef.current) {
