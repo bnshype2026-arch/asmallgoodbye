@@ -25,39 +25,26 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
 
     const paperVariants: any = {
         hidden: {
-            scaleY: 0.1,
-            scaleX: 0.8,
             opacity: 0,
-            y: 100,
-            rotateX: 45
+            y: 50,
         },
         unfolding: {
-            scaleY: [0.1, 0.5, 1],
-            scaleX: [0.8, 0.9, 1],
-            opacity: [0, 1, 1],
-            y: [100, 0, 0],
-            rotateX: [45, -10, 0],
+            opacity: 1,
+            y: 0,
             transition: {
-                duration: 1.2, // Swifter duration
+                duration: 1,
                 ease: "easeOut",
-                times: [0, 0.4, 1]
             }
         },
         reading: {
-            scaleY: 1,
-            scaleX: 1,
             opacity: 1,
             y: 0,
-            rotateX: 0,
             transition: { duration: 0.5 }
         },
         exit: {
-            scaleY: 0.1,
-            scaleX: 0.8,
             opacity: 0,
-            y: 100,
-            rotateX: -45,
-            transition: { duration: 0.8, ease: "easeIn" }
+            y: 50,
+            transition: { duration: 0.6, ease: "easeIn" }
         }
     };
 

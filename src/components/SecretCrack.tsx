@@ -81,23 +81,24 @@ export default function SecretCrack({ letterId }: { letterId: string }) {
 
                         <motion.span
                             animate={{
-                                opacity: isHovered ? [0.6, 1, 0.6] : [0.2, 0.4, 0.2],
+                                opacity: isHovered ? [0.6, 1, 0.6] : [0.3, 0.6, 0.3],
                                 scale: isHovered ? [1, 1.05, 1] : 1
                             }}
                             transition={{ duration: 3, repeat: Infinity }}
                             style={{
                                 marginTop: "1.5rem",
                                 fontFamily: "var(--font-serif)",
-                                fontSize: "0.9rem",
-                                color: "var(--color-gold-muted)",
-                                letterSpacing: "0.15em",
+                                fontSize: "0.95rem",
+                                fontWeight: 500,
+                                color: "var(--color-gold)",
+                                letterSpacing: "0.1em",
                                 fontStyle: "italic",
                                 textAlign: "center",
                                 transition: "all 0.3s ease",
-                                textShadow: "0 0 10px rgba(212,175,55,0.2)"
+                                textShadow: "0 0 10px rgba(212,175,55,0.3)"
                             }}
                         >
-                            {isHovered ? "Something deep is here..." : "Something more is hidden here..."}
+                            {isHovered ? "Open the memories hidden within..." : "Tap here to unlock the hidden memories..."}
                         </motion.span>
                     </motion.div>
                 )}

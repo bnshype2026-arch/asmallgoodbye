@@ -52,14 +52,15 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
             }}
         >
             <motion.div
-                initial={{ opacity: 0, scale: 0.8, x: "-50%", y: "-40%" }}
-                animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
-                exit={{ opacity: 0, scale: 0.8, x: "-50%", y: "-40%" }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
                 style={{
                     position: "absolute",
                     left: "50%",
                     top: "50%",
+                    transform: "translate(-50%, -50%)",
                     width: "calc(100% - 40px)",
                     maxWidth: "400px",
                     backgroundColor: "white",
