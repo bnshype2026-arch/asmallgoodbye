@@ -41,7 +41,11 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
     };
 
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             style={{
                 position: "fixed",
                 inset: 0,
@@ -51,11 +55,7 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                 WebkitBackdropFilter: "blur(10px)",
             }}
         >
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
+            <div
                 style={{
                     position: "absolute",
                     left: "50%",
@@ -185,7 +185,7 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                 >
                     Return Back
                 </button>
-            </motion.div>
-        </div>
+            </div>
+        </motion.div>
     );
 }

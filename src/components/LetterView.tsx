@@ -77,8 +77,8 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                 style={{
                     width: "100%",
                     maxWidth: "700px",
-                    height: "auto", // Grow with content
                     minHeight: "70vh",
+                    flexShrink: 0, // CRITICAL: Stop flexbox from squishing the paper vertical height
                     backgroundColor: "#FFFAEC", // Richer Cream
                     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
                     borderRadius: "4px",
@@ -127,6 +127,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                                     lineHeight: 1.8,
                                     color: "var(--color-text-on-cream)",
                                     whiteSpace: "pre-wrap",
+                                    wordBreak: "break-word",
                                     marginBottom: "3rem"
                                 }}
                             >
