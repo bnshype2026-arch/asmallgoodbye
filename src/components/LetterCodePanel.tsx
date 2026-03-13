@@ -63,7 +63,7 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 style={{
                     width: "100%",
                     maxWidth: "400px",

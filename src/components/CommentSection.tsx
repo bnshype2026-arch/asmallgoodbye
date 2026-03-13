@@ -120,16 +120,18 @@ export default function CommentSection({ letterId }: { letterId: string }) {
                     disabled={loading || !name.trim() || !message.trim()}
                     style={{
                         padding: "1rem",
-                        backgroundColor: "var(--color-text-main)",
-                        color: "var(--color-cream)",
-                        border: "none",
+                        backgroundColor: "var(--color-royal-blue)",
+                        color: "var(--color-gold)",
+                        border: "1px solid var(--color-gold-muted)",
                         borderRadius: "6px",
                         fontSize: "0.95rem",
+                        fontWeight: 600,
                         cursor: loading ? "not-allowed" : "pointer",
                         opacity: loading || !name.trim() || !message.trim() ? 0.6 : 1,
-                        transition: "opacity 0.3s ease",
+                        transition: "all 0.3s ease",
                         alignSelf: "flex-start",
-                        paddingInline: "2rem"
+                        paddingInline: "2rem",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
                     }}
                 >
                     {loading ? "Sending..." : "Send Reply"}

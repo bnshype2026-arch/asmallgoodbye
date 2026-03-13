@@ -12,11 +12,13 @@ export default function Home() {
 
   const handleEnvelopeClick = () => {
     setSceneState("code_input");
+    window.dispatchEvent(new CustomEvent("play-bgm"));
   };
 
   const handleCodeSuccess = (data: any) => {
     setLetterData(data);
     setSceneState("opening");
+    window.dispatchEvent(new CustomEvent("play-bgm"));
 
     // Auto-transition to reading after opening animation
     setTimeout(() => {

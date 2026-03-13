@@ -9,58 +9,71 @@ export default function SecretCrack({ letterId }: { letterId: string }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div style={{ margin: "2rem 0", position: "relative" }}>
+        <div style={{ margin: "3rem 0", position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <AnimatePresence>
                 {!isOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scaleY: 0 }}
-                        style={{ display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", padding: "1rem" }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            padding: "2rem",
+                            width: "100%"
+                        }}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                         onClick={() => setIsOpen(true)}
                     >
+                        {/* The Pulsing Crack */}
                         <motion.div
                             animate={{
-                                opacity: isHovered ? [0.6, 1, 0.6] : 0.6,
-                                scaleX: isHovered ? 1.05 : 1,
-                                boxShadow: isHovered ? "0 0 10px rgba(212,175,55,0.4)" : "none",
+                                width: isHovered ? "120px" : "100px",
+                                height: isHovered ? "4px" : "2px",
+                                opacity: [0.4, 0.8, 0.4],
+                                boxShadow: [
+                                    "0 0 0px rgba(212,175,55,0)",
+                                    "0 0 15px rgba(212,175,55,0.5)",
+                                    "0 0 0px rgba(212,175,55,0)"
+                                ]
                             }}
-                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                             style={{
-                                width: "80px",
-                                height: "2px",
-                                backgroundColor: "rgba(100, 90, 80, 0.3)",
-                                position: "relative",
+                                backgroundColor: "var(--color-gold-muted)",
                                 borderRadius: "50%",
+                                position: "relative",
                             }}
                         >
-                            {/* Glowing particles in the crack */}
-                            {isHovered && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    style={{ position: "absolute", inset: -10, background: "radial-gradient(ellipse at center, rgba(212,175,55,0.2) 0%, transparent 70%)" }}
-                                />
-                            )}
+                            {/* Inner Glow */}
+                            <div style={{
+                                position: "absolute",
+                                inset: -2,
+                                background: "var(--color-gold)",
+                                filter: "blur(4px)",
+                                opacity: 0.5,
+                                borderRadius: "inherit"
+                            }} />
                         </motion.div>
 
                         <motion.span
-                            animate={{ opacity: isHovered ? 1 : 0 }}
+                            initial={{ opacity: 0.3 }}
+                            animate={{ opacity: isHovered ? 1 : 0.4, y: isHovered ? 5 : 0 }}
                             style={{
-                                marginLeft: "1rem",
-                                fontFamily: "var(--font-sans)",
-                                fontSize: "0.75rem",
+                                marginTop: "1rem",
+                                fontFamily: "var(--font-serif)",
+                                fontSize: "0.85rem",
                                 color: "var(--color-gold-muted)",
-                                letterSpacing: "0.05em",
+                                letterSpacing: "0.1em",
                                 fontStyle: "italic",
-                                position: "absolute",
-                                right: "10%",
-                                pointerEvents: "none"
+                                textAlign: "center",
+                                transition: "all 0.3s ease"
                             }}
                         >
-                            Something more is hidden here...
+                            {isHovered ? "Open the memories hidden within..." : "Something more is hidden here..."}
                         </motion.span>
                     </motion.div>
                 )}

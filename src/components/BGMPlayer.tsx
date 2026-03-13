@@ -20,13 +20,23 @@ export default function BGMPlayer() {
             setIsPlaying(false); // Revert to false if blocked
         });
 
+        // Listen for internal play command
+        const handlePlayCommand = () => {
+            if (audioRef.current && !isPlaying) {
+                audioRef.current.play().then(() => setIsPlaying(true)).catch(e => console.log(e));
+            }
+        };
+
+        window.addEventListener("play-bgm", handlePlayCommand);
+
         return () => {
+            window.removeEventListener("play-bgm", handlePlayCommand);
             if (audioRef.current) {
                 audioRef.current.pause();
                 audioRef.current = null;
             }
         };
-    }, []);
+    }, [isPlaying]);
 
     const toggleMute = () => {
         if (!audioRef.current) return;
