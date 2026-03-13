@@ -186,8 +186,8 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                     onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
                 >
                     Cancel
+                </button>
             </motion.div>
         </motion.div>
-        </motion.div >
     );
 }
