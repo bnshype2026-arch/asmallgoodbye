@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
@@ -118,7 +119,7 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
             </div>
 
             <AnimatePresence>
-                {selectedPhotoIndex !== null && (
+                {selectedPhotoIndex !== null && typeof window !== "undefined" && createPortal(
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -156,7 +157,7 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                             <X size={24} />
                         </button>
 
-                        <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ position: "relative", width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" }}>
                             {photos.length > 1 && (
                                 <button
                                     onClick={(e) => {
@@ -166,6 +167,7 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                                     style={{
                                         position: "absolute",
                                         left: "2rem",
+                                        zIndex: 10,
                                         background: "rgba(255,255,255,0.05)",
                                         border: "none",
                                         color: "white",
@@ -189,11 +191,13 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                                 transition={{ type: "spring", damping: 30, stiffness: 200 }}
                                 onClick={(e) => e.stopPropagation()}
                                 style={{
-                                    maxWidth: "90vw",
-                                    maxHeight: "80vh",
-                                    backgroundColor: "white",
-                                    padding: "20px 20px 60px 20px",
-                                    boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                                    maxWidth: "100vw",
+                                    maxHeight: "100vh",
+                                    backgroundColor: "transparent", // No more white box
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                     position: "relative",
                                     cursor: "default"
                                 }}
@@ -202,26 +206,27 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                                     src={photos[selectedPhotoIndex].photo_url}
                                     alt={photos[selectedPhotoIndex].caption || "Memory"}
                                     style={{
-                                        maxWidth: "100%",
-                                        maxHeight: "65vh",
+                                        maxWidth: "95vw",
+                                        maxHeight: "85vh",
                                         objectFit: "contain",
-                                        display: "block"
+                                        display: "block",
+                                        boxShadow: "0 30px 60px rgba(0,0,0,0.5)",
+                                        borderRadius: "4px"
                                     }}
                                 />
 
                                 {photos[selectedPhotoIndex].caption && (
                                     <p style={{
-                                        position: "absolute",
-                                        bottom: "1.5rem",
-                                        left: "20px",
-                                        right: "20px",
+                                        marginTop: "1.5rem",
                                         textAlign: "center",
                                         fontFamily: "var(--font-serif)",
-                                        fontSize: "1.2rem",
-                                        color: "#333",
+                                        fontSize: "clamp(1rem, 4vw, 1.2rem)",
+                                        color: "white",
                                         margin: 0,
-                                        fontStyle: "italic"
-                                    }}>
+                                        fontStyle: "italic",
+                                        textShadow: "0 2px 4px rgba(0,0,0,0.5)"
+                                    }}
+                                    >
                                         {photos[selectedPhotoIndex].caption}
                                     </p>
                                 )}
@@ -236,6 +241,7 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                                     style={{
                                         position: "absolute",
                                         right: "2rem",
+                                        zIndex: 10,
                                         background: "rgba(255,255,255,0.05)",
                                         border: "none",
                                         color: "white",
@@ -251,7 +257,8 @@ export default function MemoryGallery({ letterId }: { letterId: string }) {
                                 </button>
                             )}
                         </div>
-                    </motion.div>
+                    </motion.div>,
+                    document.body
                 )}
             </AnimatePresence>
         </div>

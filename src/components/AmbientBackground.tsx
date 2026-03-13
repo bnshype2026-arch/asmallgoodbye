@@ -8,15 +8,15 @@ export default function AmbientBackground() {
 
     useEffect(() => {
         // Generate rose petals
-        const newPetals = Array.from({ length: 30 }).map((_, i) => ({
+        const newPetals = Array.from({ length: 15 }).map((_, i) => ({
             id: i,
             x: Math.random() * 100, // vw
             y: -10 - Math.random() * 20, // start above screen
-            size: Math.random() * 15 + 10, // px
-            duration: Math.random() * 8 + 6, // s (swifter than before)
+            size: Math.random() * 8 + 6, // smaller size: 6px to 14px
+            duration: Math.random() * 6 + 5, // slightly faster
             delay: Math.random() * 10, // s
             rotation: Math.random() * 360,
-            swing: Math.random() * 40 - 20, // horizontal swing
+            swing: Math.random() * 30 - 15, // horizontal swing
         }));
         setPetals(newPetals);
     }, []);
@@ -109,6 +109,7 @@ export default function AmbientBackground() {
                             borderRadius: "50% 0 50% 50%", // Petal shape
                             boxShadow: "0 0 10px rgba(155, 17, 30, 0.4)",
                             filter: "blur(0.5px)",
+                            willChange: "transform",
                         }}
                     />
                 ))}
