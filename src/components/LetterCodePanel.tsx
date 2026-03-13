@@ -102,7 +102,15 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                     }}
                 />
 
-                <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "1.5rem", color: "var(--color-text-main)", marginBottom: "2rem", textAlign: "center", position: "relative" }}>
+                <h2 style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "1.6rem",
+                    color: "var(--color-royal-blue)",
+                    marginBottom: "2rem",
+                    textAlign: "center",
+                    position: "relative",
+                    letterSpacing: "0.02em"
+                }}>
                     Enter your Letter Code
                 </h2>
 
@@ -114,20 +122,28 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                         placeholder="[ Enter Code ]"
                         style={{
                             width: "100%",
-                            padding: "1rem",
-                            fontSize: "1rem",
+                            padding: "1.2rem",
+                            fontSize: "1.1rem",
                             textAlign: "center",
-                            backgroundColor: "rgba(255,255,255,0.5)",
-                            border: "1px solid rgba(191, 165, 101, 0.3)",
-                            borderRadius: "6px",
-                            color: "var(--color-text-main)",
+                            backgroundColor: "rgba(255,255,255,0.8)",
+                            border: "2px solid var(--color-gold-muted)",
+                            borderRadius: "8px",
+                            color: "var(--color-royal-blue)",
                             marginBottom: "1rem",
                             transition: "all 0.3s ease",
-                            letterSpacing: "0.1em",
+                            letterSpacing: "0.15em",
                             textTransform: "uppercase",
                         }}
-                        onFocus={(e) => (e.target.style.borderColor = "var(--color-gold-muted)", e.target.style.backgroundColor = "rgba(255,255,255,0.8)")}
-                        onBlur={(e) => (e.target.style.borderColor = "rgba(191, 165, 101, 0.3)", e.target.style.backgroundColor = "rgba(255,255,255,0.5)")}
+                        onFocus={(e) => {
+                            e.target.style.borderColor = "var(--color-gold)";
+                            e.target.style.backgroundColor = "white";
+                            e.target.style.boxShadow = "0 0 15px rgba(212,175,55,0.2)";
+                        }}
+                        onBlur={(e) => {
+                            e.target.style.borderColor = "var(--color-gold-muted)";
+                            e.target.style.backgroundColor = "rgba(255,255,255,0.8)";
+                            e.target.style.boxShadow = "none";
+                        }}
                         disabled={loading}
                     />
 
@@ -138,7 +154,7 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0 }}
-                                    style={{ color: "#8B0000", fontSize: "0.85rem", margin: 0 }}
+                                    style={{ color: "var(--color-royal-red)", fontSize: "0.9rem", fontWeight: 600, margin: 0 }}
                                 >
                                     {error}
                                 </motion.p>
@@ -151,16 +167,29 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                         disabled={loading || !code.trim()}
                         style={{
                             width: "100%",
-                            padding: "1rem",
-                            backgroundColor: "var(--color-text-main)",
-                            color: "var(--color-cream)",
-                            border: "none",
-                            borderRadius: "6px",
-                            fontSize: "1rem",
-                            fontWeight: 500,
+                            padding: "1.1rem",
+                            backgroundColor: "var(--color-royal-blue)",
+                            color: "var(--color-gold)",
+                            border: "1px solid var(--color-gold)",
+                            borderRadius: "8px",
+                            fontSize: "1.1rem",
+                            fontWeight: 600,
                             cursor: loading || !code.trim() ? "not-allowed" : "pointer",
-                            transition: "background-color 0.3s ease",
+                            transition: "all 0.3s ease",
                             opacity: loading || !code.trim() ? 0.7 : 1,
+                            boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
+                        }}
+                        onMouseEnter={(e) => {
+                            if (!loading && code.trim()) {
+                                e.currentTarget.style.backgroundColor = "var(--color-royal-blue-light)";
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            if (!loading && code.trim()) {
+                                e.currentTarget.style.backgroundColor = "var(--color-royal-blue)";
+                                e.currentTarget.style.transform = "translateY(0)";
+                            }
                         }}
                     >
                         {loading ? "Opening..." : "Open the Letter"}
