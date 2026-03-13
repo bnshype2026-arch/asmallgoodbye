@@ -173,8 +173,9 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                         marginTop: "1.5rem",
                         background: "transparent",
                         border: "none",
-                        color: "var(--color-text-muted)",
-                        fontSize: "0.85rem",
+                        color: "var(--color-royal-red)",
+                        fontSize: "0.95rem",
+                        fontWeight: 500,
                         cursor: "pointer",
                         position: "relative",
                         zIndex: 2,
@@ -182,8 +183,8 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
                         textUnderlineOffset: "4px",
                         transition: "color 0.3s ease",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-main)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-royal-red-dark)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-royal-red)")}
                 >
                     Cancel
                 </button>
