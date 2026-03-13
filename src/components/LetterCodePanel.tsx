@@ -45,29 +45,27 @@ export default function LetterCodePanel({ onSuccess, onCancel }: LetterCodePanel
             style={{
                 position: "fixed",
                 inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 150, // Higher than envelope
-                padding: "20px",
-                backgroundColor: "rgba(0, 0, 0, 0.6)", // Darker for better focus
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
+                zIndex: 150,
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
             }}
         >
             <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 30 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} // Swift easeOut
+                initial={{ opacity: 0, scale: 0.8, x: "-50%", y: "-40%" }}
+                animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
+                exit={{ opacity: 0, scale: 0.8, x: "-50%", y: "-40%" }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 style={{
-                    width: "100%",
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    width: "calc(100% - 40px)",
                     maxWidth: "400px",
                     backgroundColor: "white",
-                    padding: "clamp(2rem, 8vw, 3rem) 2rem",
-                    borderRadius: "12px",
-                    boxShadow: "0 40px 100px rgba(0,0,0,0.5)",
-                    position: "relative",
+                    padding: "3rem 2rem",
+                    borderRadius: "16px",
+                    boxShadow: "0 50px 100px rgba(0,0,0,0.6)",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",

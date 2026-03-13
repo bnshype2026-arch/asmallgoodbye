@@ -75,7 +75,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                padding: "4rem 2rem",
+                padding: "4rem 1rem 8rem 1rem", // More bottom padding for scroll space
                 overflowY: "auto",
                 overflowX: "hidden",
                 backgroundColor: "rgba(0, 31, 63, 0.8)", // Royal Blue Backdrop
@@ -90,15 +90,17 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                 style={{
                     width: "100%",
                     maxWidth: "700px",
-                    minHeight: "80vh",
+                    height: "auto", // Grow with content
+                    minHeight: "70vh",
                     backgroundColor: "#FFFAEC", // Richer Cream
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E")`,
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
                     borderRadius: "4px",
                     boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.2)",
                     position: "relative",
                     display: "flex",
                     flexDirection: "column",
-                    transformOrigin: "bottom center",
+                    transformOrigin: "top center", // Unfold from top
+                    marginBottom: "4rem",
                 }}
             >
                 {/* Paper folds textures (subtle horizontal lines) */}

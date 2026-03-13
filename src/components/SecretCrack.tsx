@@ -9,71 +9,95 @@ export default function SecretCrack({ letterId }: { letterId: string }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div style={{ margin: "3rem 0", position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div
+            style={{
+                margin: "4rem 0",
+                position: "relative",
+                minHeight: "100px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center"
+            }}
+        >
             <AnimatePresence>
                 {!isOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
+                        exit={{ opacity: 0, scale: 1.5, filter: "blur(20px)" }}
                         style={{
+                            cursor: "pointer",
+                            width: "100%",
                             display: "flex",
                             flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                            padding: "2rem",
-                            width: "100%"
+                            alignItems: "center"
                         }}
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                         onClick={() => setIsOpen(true)}
                     >
-                        {/* The Pulsing Crack */}
-                        <motion.div
-                            animate={{
-                                width: isHovered ? "120px" : "100px",
-                                height: isHovered ? "4px" : "2px",
-                                opacity: [0.4, 0.8, 0.4],
-                                boxShadow: [
-                                    "0 0 0px rgba(212,175,55,0)",
-                                    "0 0 15px rgba(212,175,55,0.5)",
-                                    "0 0 0px rgba(212,175,55,0)"
-                                ]
-                            }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                            style={{
-                                backgroundColor: "var(--color-gold-muted)",
-                                borderRadius: "50%",
-                                position: "relative",
-                            }}
-                        >
-                            {/* Inner Glow */}
-                            <div style={{
-                                position: "absolute",
-                                inset: -2,
-                                background: "var(--color-gold)",
-                                filter: "blur(4px)",
-                                opacity: 0.5,
-                                borderRadius: "inherit"
-                            }} />
-                        </motion.div>
+                        {/* The Growing Crack */}
+                        <div style={{ position: "relative", height: "40px", display: "flex", alignItems: "center", justifyContent: "center", width: "100%" }}>
+                            <motion.div
+                                animate={{
+                                    width: isHovered ? ["40px", "240px", "40px"] : ["20px", "140px", "20px"],
+                                    opacity: [0.1, 0.4, 0.1],
+                                }}
+                                transition={{
+                                    duration: isHovered ? 2 : 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                style={{
+                                    height: "1px",
+                                    backgroundColor: "var(--color-gold)",
+                                    boxShadow: "0 0 15px 2px rgba(212,175,55,0.4)",
+                                    borderRadius: "50%",
+                                    position: "relative",
+                                    zIndex: 1
+                                }}
+                            >
+                                {/* Center Glow Slit */}
+                                <motion.div
+                                    animate={{
+                                        width: isHovered ? ["10px", "60px", "10px"] : ["5px", "30px", "5px"],
+                                        opacity: [0.3, 1, 0.3]
+                                    }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                    style={{
+                                        position: "absolute",
+                                        left: "50%",
+                                        top: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        height: "2px",
+                                        backgroundColor: "#fff",
+                                        boxShadow: "0 0 20px 5px var(--color-gold)",
+                                        borderRadius: "50%"
+                                    }}
+                                />
+                            </motion.div>
+                        </div>
 
                         <motion.span
-                            initial={{ opacity: 0.3 }}
-                            animate={{ opacity: isHovered ? 1 : 0.4, y: isHovered ? 5 : 0 }}
+                            animate={{
+                                opacity: isHovered ? [0.6, 1, 0.6] : [0.2, 0.4, 0.2],
+                                scale: isHovered ? [1, 1.05, 1] : 1
+                            }}
+                            transition={{ duration: 3, repeat: Infinity }}
                             style={{
-                                marginTop: "1rem",
+                                marginTop: "1.5rem",
                                 fontFamily: "var(--font-serif)",
-                                fontSize: "0.85rem",
+                                fontSize: "0.9rem",
                                 color: "var(--color-gold-muted)",
-                                letterSpacing: "0.1em",
+                                letterSpacing: "0.15em",
                                 fontStyle: "italic",
                                 textAlign: "center",
-                                transition: "all 0.3s ease"
+                                transition: "all 0.3s ease",
+                                textShadow: "0 0 10px rgba(212,175,55,0.2)"
                             }}
                         >
-                            {isHovered ? "Open the memories hidden within..." : "Something more is hidden here..."}
+                            {isHovered ? "Something deep is here..." : "Something more is hidden here..."}
                         </motion.span>
                     </motion.div>
                 )}
