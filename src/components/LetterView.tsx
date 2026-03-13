@@ -18,7 +18,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
         if (!isOpening) {
             setShowContent(true);
         } else {
-            const timer = setTimeout(() => setShowContent(true), 3500); // Wait for unfold
+            const timer = setTimeout(() => setShowContent(true), 1200); // Wait for unfold (swifter)
             return () => clearTimeout(timer);
         }
     }, [isOpening]);
@@ -38,9 +38,9 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
             y: [100, 0, 0],
             rotateX: [45, -10, 0],
             transition: {
-                duration: 3,
-                ease: "easeInOut",
-                times: [0, 0.6, 1]
+                duration: 1.2, // Swifter duration
+                ease: "easeOut",
+                times: [0, 0.4, 1]
             }
         },
         reading: {
@@ -49,7 +49,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
             opacity: 1,
             y: 0,
             rotateX: 0,
-            transition: { duration: 0.8 }
+            transition: { duration: 0.5 }
         },
         exit: {
             scaleY: 0.1,
@@ -57,7 +57,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
             opacity: 0,
             y: 100,
             rotateX: -45,
-            transition: { duration: 1.5, ease: "easeInOut" }
+            transition: { duration: 0.8, ease: "easeIn" }
         }
     };
 
@@ -66,7 +66,7 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.6 }}
             style={{
                 position: "fixed",
                 inset: 0,
@@ -78,8 +78,8 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                 padding: "4rem 2rem",
                 overflowY: "auto",
                 overflowX: "hidden",
-                backgroundColor: "rgba(253, 251, 247, 0.6)",
-                backdropFilter: "blur(5px)",
+                backgroundColor: "rgba(0, 31, 63, 0.8)", // Royal Blue Backdrop
+                backdropFilter: "blur(12px)",
             }}
         >
             <motion.div
@@ -91,10 +91,10 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                     width: "100%",
                     maxWidth: "700px",
                     minHeight: "80vh",
-                    backgroundColor: "#FDFBF7",
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E")`,
+                    backgroundColor: "#FFFAEC", // Richer Cream
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E")`,
                     borderRadius: "4px",
-                    boxShadow: "0 20px 60px rgba(100,80,60,0.15), 0 2px 10px rgba(100,80,60,0.05)",
+                    boxShadow: "0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.2)",
                     position: "relative",
                     display: "flex",
                     flexDirection: "column",
@@ -157,23 +157,26 @@ export default function LetterView({ letterData, isOpening, onClose }: LetterVie
                                 <button
                                     onClick={onClose}
                                     style={{
-                                        padding: "0.8rem 2rem",
-                                        backgroundColor: "transparent",
-                                        color: "var(--color-text-muted)",
+                                        padding: "1rem 2.5rem",
+                                        backgroundColor: "var(--color-royal-blue)",
+                                        color: "var(--color-gold)",
                                         border: "1px solid var(--color-gold-muted)",
-                                        borderRadius: "30px",
+                                        borderRadius: "35px",
                                         fontFamily: "var(--font-sans)",
-                                        fontSize: "0.9rem",
+                                        fontSize: "0.95rem",
+                                        fontWeight: 600,
                                         cursor: "pointer",
                                         transition: "all 0.3s ease",
+                                        letterSpacing: "0.05em",
+                                        boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
                                     }}
                                     onMouseEnter={(e) => {
-                                        e.currentTarget.style.backgroundColor = "var(--color-gold-muted)";
-                                        e.currentTarget.style.color = "var(--color-cream)";
+                                        e.currentTarget.style.backgroundColor = "var(--color-royal-blue-light)";
+                                        e.currentTarget.style.transform = "translateY(-2px)";
                                     }}
                                     onMouseLeave={(e) => {
-                                        e.currentTarget.style.backgroundColor = "transparent";
-                                        e.currentTarget.style.color = "var(--color-text-muted)";
+                                        e.currentTarget.style.backgroundColor = "var(--color-royal-blue)";
+                                        e.currentTarget.style.transform = "translateY(0)";
                                     }}
                                 >
                                     Close Letter

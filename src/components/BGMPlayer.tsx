@@ -44,20 +44,29 @@ export default function BGMPlayer() {
                 bottom: "24px",
                 left: "24px",
                 zIndex: 50,
-                background: "transparent",
-                border: "none",
-                color: "var(--color-text-muted)",
+                background: "rgba(0,0,0,0.3)",
+                border: "1px solid var(--color-gold-muted)",
+                color: "var(--color-gold)",
                 cursor: "pointer",
-                padding: "8px",
+                padding: "10px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "50%",
-                transition: "color 0.3s ease",
+                transition: "all 0.3s ease",
+                backdropFilter: "blur(4px)",
             }}
             aria-label="Toggle background music"
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-text-main)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-muted)")}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--color-gold)";
+                e.currentTarget.style.borderColor = "var(--color-gold)";
+                e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.5)";
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--color-gold)";
+                e.currentTarget.style.borderColor = "var(--color-gold-muted)";
+                e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.3)";
+            }}
         >
             {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
         </motion.button>
